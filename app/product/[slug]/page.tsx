@@ -54,15 +54,15 @@ export default function ProductDetailPage({
         url={`https://dryftcult.in/product/${product.slug}`}
       />
 
-      <div className="min-h-screen bg-black text-white font-mono pt-32 pb-24 px-6 md:px-12 max-w-[1800px] mx-auto">
+      <div className="min-h-screen bg-black text-white font-mono pt-28 sm:pt-32 pb-16 sm:pb-24 px-4 sm:px-6 md:px-12 max-w-[1800px] mx-auto overflow-x-hidden">
         
         {/* Breadcrumb Navigation */}
-        <div className="text-xs text-neutral-500 tracking-widest uppercase mb-8 flex items-center gap-2">
+        <div className="text-[10px] sm:text-xs text-neutral-500 tracking-widest uppercase mb-6 sm:mb-8 flex flex-wrap items-center gap-1.5 sm:gap-2">
           <Link href="/" className="hover:text-white">HOME</Link>
           <span>/</span>
           <Link href="/shop" className="hover:text-white">SHOP</Link>
           <span>/</span>
-          <Link href={`/shop?category=${product.category}`} className="hover:text-white">
+          <Link href={`/shop?category=${product.category}`} className="hover:text-white uppercase">
             {product.category}
           </Link>
           <span>/</span>
@@ -70,10 +70,10 @@ export default function ProductDetailPage({
         </div>
 
         {/* Main Grid: Left Gallery | Right Details */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-start">
           
           {/* Left Gallery (7 cols on desktop) */}
-          <div className="lg:col-span-7 space-y-6">
+          <div className="lg:col-span-7 space-y-4 sm:space-y-6">
             {/* Primary Large Image */}
             <div className="relative aspect-[3/4] bg-neutral-900 border border-white/10 overflow-hidden">
               <Image
@@ -81,23 +81,24 @@ export default function ProductDetailPage({
                 alt={product.name}
                 fill
                 priority
+                sizes="(max-width: 1024px) 100vw, 55vw"
                 className="object-cover object-center"
               />
               {product.isNew && (
-                <span className="absolute top-4 left-4 bg-white text-black text-xs font-bold px-3 py-1 tracking-widest">
+                <span className="absolute top-3 left-3 sm:top-4 sm:left-4 bg-white text-black text-[10px] sm:text-xs font-bold px-2.5 py-0.5 sm:px-3 sm:py-1 tracking-widest">
                   DROP 001
                 </span>
               )}
             </div>
 
-            {/* Thumbnails list */}
+            {/* Thumbnails list — Touch Swipe on Mobile */}
             {product.images.length > 1 && (
-              <div className="grid grid-cols-3 gap-4">
+              <div className="flex overflow-x-auto no-scrollbar snap-x gap-3 py-1 sm:grid sm:grid-cols-3 sm:overflow-visible">
                 {product.images.map((img, idx) => (
                   <button
                     key={idx}
                     onClick={() => setSelectedImage(idx)}
-                    className={`relative aspect-[3/4] bg-neutral-900 border overflow-hidden transition-all ${
+                    className={`relative aspect-[3/4] w-24 sm:w-auto shrink-0 bg-neutral-900 border overflow-hidden transition-all snap-start ${
                       selectedImage === idx
                         ? "border-white ring-1 ring-white"
                         : "border-white/10 opacity-60 hover:opacity-100"
@@ -107,6 +108,7 @@ export default function ProductDetailPage({
                       src={img}
                       alt={`${product.name} view ${idx + 1}`}
                       fill
+                      sizes="(max-width: 640px) 96px, 33vw"
                       className="object-cover"
                     />
                   </button>
@@ -115,30 +117,30 @@ export default function ProductDetailPage({
             )}
           </div>
 
-          {/* Right Info Panel (Sticky 5 cols) */}
-          <div className="lg:col-span-5 space-y-8 lg:sticky lg:top-32">
+          {/* Right Info Panel (Sticky 5 cols on desktop) */}
+          <div className="lg:col-span-5 space-y-6 sm:space-y-8 lg:sticky lg:top-32">
             
-            <div className="space-y-3 border-b border-white/10 pb-6">
-              <span className="text-xs text-neutral-500 tracking-widest uppercase block">
+            <div className="space-y-2 sm:space-y-3 border-b border-white/10 pb-4 sm:pb-6">
+              <span className="text-[10px] sm:text-xs text-neutral-500 tracking-widest uppercase block">
                 SKU: {product.sku}
               </span>
-              <h1 className="text-3xl md:text-5xl font-bold tracking-tighter uppercase leading-none">
+              <h1 className="text-2xl sm:text-4xl md:text-5xl font-bold tracking-tighter uppercase leading-tight">
                 {product.name}
               </h1>
               <p className="text-xs text-neutral-400 tracking-wider">
                 {product.tagline}
               </p>
               
-              <div className="pt-2 flex items-baseline gap-4">
-                <span className="text-2xl font-bold tracking-wider text-white">
+              <div className="pt-2 flex flex-wrap items-baseline gap-2.5 sm:gap-4">
+                <span className="text-xl sm:text-2xl font-bold tracking-wider text-white">
                   ₹{product.price.toLocaleString("en-IN")}
                 </span>
                 {product.originalPrice && (
-                  <span className="text-sm font-mono text-neutral-500 line-through">
+                  <span className="text-xs sm:text-sm font-mono text-neutral-500 line-through">
                     ₹{product.originalPrice.toLocaleString("en-IN")}
                   </span>
                 )}
-                <span className="text-[10px] text-emerald-400 border border-emerald-400/30 px-2 py-0.5 uppercase tracking-widest">
+                <span className="text-[9px] sm:text-[10px] text-emerald-400 border border-emerald-400/30 px-2 py-0.5 uppercase tracking-widest block sm:inline">
                   TAX INCLUDED // FREE EXPRESS COURIER
                 </span>
               </div>
@@ -150,21 +152,21 @@ export default function ProductDetailPage({
             </p>
 
             {/* Size Selector */}
-            <div className="space-y-4 border-b border-white/10 pb-6">
+            <div className="space-y-3 sm:space-y-4 border-b border-white/10 pb-6">
               <div className="flex justify-between items-center text-xs">
-                <span className="text-neutral-400 tracking-widest uppercase font-bold">
+                <span className="text-neutral-400 tracking-widest uppercase font-bold text-[11px] sm:text-xs">
                   SELECT SILHOUETTE SIZE
                 </span>
                 <button
                   onClick={() => setSizeGuideOpen(true)}
-                  className="text-neutral-400 hover:text-white flex items-center gap-1.5 underline uppercase tracking-widest"
+                  className="text-neutral-400 hover:text-white flex items-center gap-1 underline uppercase tracking-widest min-h-[44px] px-1"
                 >
                   <Ruler size={14} />
                   <span>SIZE GUIDE</span>
                 </button>
               </div>
 
-              <div className="grid grid-cols-5 gap-3">
+              <div className="grid grid-cols-5 gap-2 sm:gap-3">
                 {["XS", "S", "M", "L", "XL"].map((size) => {
                   const isAvailable = product.sizes.includes(size as any);
                   const isSelected = selectedSize === size;
@@ -173,7 +175,7 @@ export default function ProductDetailPage({
                       key={size}
                       disabled={!isAvailable}
                       onClick={() => setSelectedSize(size as any)}
-                      className={`py-3 text-xs font-mono tracking-widest uppercase border transition-all ${
+                      className={`py-3 text-xs font-mono tracking-widest uppercase border transition-all min-h-[44px] flex items-center justify-center ${
                         !isAvailable
                           ? "opacity-30 border-white/5 cursor-not-allowed line-through text-neutral-600"
                           : isSelected
@@ -188,11 +190,11 @@ export default function ProductDetailPage({
               </div>
             </div>
 
-            {/* CTAs */}
-            <div className="space-y-3 pt-2">
+            {/* Action Buttons / Mobile Friendly CTAs */}
+            <div className="space-y-3 pt-1">
               <button
                 onClick={() => addToCart(product, selectedSize, 1)}
-                className="w-full bg-white text-black py-4 text-xs font-bold tracking-widest uppercase hover:bg-neutral-200 transition-colors border border-white flex items-center justify-center gap-2 group"
+                className="w-full bg-white text-black py-4 text-xs font-bold tracking-widest uppercase hover:bg-neutral-200 transition-colors border border-white flex items-center justify-center gap-2 group min-h-[48px]"
               >
                 <span>ADD TO BAG — SIZE {selectedSize}</span>
                 <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
@@ -200,7 +202,7 @@ export default function ProductDetailPage({
 
               <button
                 onClick={handleBuyNow}
-                className="w-full bg-neutral-900 text-white py-4 text-xs font-bold tracking-widest uppercase hover:bg-neutral-800 transition-colors border border-white/20"
+                className="w-full bg-neutral-900 text-white py-4 text-xs font-bold tracking-widest uppercase hover:bg-neutral-800 transition-colors border border-white/20 min-h-[48px]"
               >
                 BUY NOW // INSTANT CHECKOUT
               </button>
@@ -209,27 +211,27 @@ export default function ProductDetailPage({
                 href={`https://wa.me/919328171761?text=${encodeURIComponent(`Hi DRYFT CULT, I would like to check availability for ${product.name} [Size: ${selectedSize}].`)}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full bg-emerald-950/80 text-emerald-300 hover:bg-emerald-900 hover:text-emerald-100 py-3.5 text-xs font-bold tracking-widest uppercase transition-colors border border-emerald-500/30 flex items-center justify-center gap-2"
+                className="w-full bg-emerald-950/80 text-emerald-300 hover:bg-emerald-900 hover:text-emerald-100 py-3.5 px-3 text-[11px] sm:text-xs font-bold tracking-widest uppercase transition-colors border border-emerald-500/30 flex items-center justify-center gap-2 min-h-[44px] text-center"
               >
-                <MessageCircle size={16} />
-                <span>CHECK AVAILABILITY ON WHATSAPP (+91 93281 71761) ↗</span>
+                <MessageCircle size={16} className="shrink-0" />
+                <span className="truncate">CHECK AVAILABILITY ON WHATSAPP (+91 93281 71761) ↗</span>
               </a>
             </div>
 
             {/* Accordion Specs */}
-            <div className="border-t border-white/10 pt-4 divide-y divide-white/10 text-xs font-mono">
+            <div className="border-t border-white/10 pt-2 divide-y divide-white/10 text-xs font-mono">
               
               {/* Accordion Item 1: Material & Specs */}
-              <div className="py-4">
+              <div className="py-3 sm:py-4">
                 <button
                   onClick={() => toggleAccordion("details")}
-                  className="w-full flex items-center justify-between text-left font-bold uppercase tracking-wider text-white hover:text-neutral-300"
+                  className="w-full flex items-center justify-between text-left font-bold uppercase tracking-wider text-white hover:text-neutral-300 min-h-[44px]"
                 >
                   <span>FABRIC & MATERIAL SPECS</span>
                   {openAccordion === "details" ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
                 </button>
                 {openAccordion === "details" && (
-                  <div className="mt-3 text-neutral-400 space-y-2 leading-relaxed">
+                  <div className="mt-2 text-neutral-400 space-y-2 leading-relaxed text-[11px] sm:text-xs">
                     <p><strong className="text-white">COMPOSITION:</strong> {product.details.material}</p>
                     <p><strong className="text-white">FIT STANCE:</strong> {product.details.fit}</p>
                     <p><strong className="text-white">FULL STORY:</strong> {product.fullDescription}</p>
@@ -238,38 +240,38 @@ export default function ProductDetailPage({
               </div>
 
               {/* Accordion Item 2: Care Instructions */}
-              <div className="py-4">
+              <div className="py-3 sm:py-4">
                 <button
                   onClick={() => toggleAccordion("care")}
-                  className="w-full flex items-center justify-between text-left font-bold uppercase tracking-wider text-white hover:text-neutral-300"
+                  className="w-full flex items-center justify-between text-left font-bold uppercase tracking-wider text-white hover:text-neutral-300 min-h-[44px]"
                 >
                   <span>GARMENT CARE</span>
                   {openAccordion === "care" ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
                 </button>
                 {openAccordion === "care" && (
-                  <div className="mt-3 text-neutral-400 leading-relaxed">
+                  <div className="mt-2 text-neutral-400 leading-relaxed text-[11px] sm:text-xs">
                     {product.details.care}
                   </div>
                 )}
               </div>
 
               {/* Accordion Item 3: Shipping & Returns */}
-              <div className="py-4">
+              <div className="py-3 sm:py-4">
                 <button
                   onClick={() => toggleAccordion("shipping")}
-                  className="w-full flex items-center justify-between text-left font-bold uppercase tracking-wider text-white hover:text-neutral-300"
+                  className="w-full flex items-center justify-between text-left font-bold uppercase tracking-wider text-white hover:text-neutral-300 min-h-[44px]"
                 >
                   <span>SHIPPING & RETURNS (INDIA)</span>
                   {openAccordion === "shipping" ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
                 </button>
                 {openAccordion === "shipping" && (
-                  <div className="mt-3 text-neutral-400 space-y-3 leading-relaxed">
+                  <div className="mt-2 text-neutral-400 space-y-2 leading-relaxed text-[11px] sm:text-xs">
                     <div className="flex items-center gap-2 text-white">
-                      <Truck size={14} />
+                      <Truck size={14} className="shrink-0" />
                       <span>{product.details.shipping}</span>
                     </div>
                     <div className="flex items-center gap-2 text-neutral-400">
-                      <RefreshCw size={14} />
+                      <RefreshCw size={14} className="shrink-0" />
                       <span>Hassle-free 7-day returns & exchange available for size adjustments.</span>
                     </div>
                   </div>
@@ -278,7 +280,7 @@ export default function ProductDetailPage({
             </div>
 
             {/* Authenticity Badge */}
-            <div className="p-4 bg-white/5 border border-white/10 flex items-center gap-3 text-xs text-neutral-400">
+            <div className="p-3 sm:p-4 bg-white/5 border border-white/10 flex items-center gap-3 text-[11px] sm:text-xs text-neutral-400">
               <ShieldCheck size={20} className="text-white shrink-0" />
               <span>OFFICIAL DRYFT CULT SERIALIZED ITEM. INCLUDES AUTHENTICITY NFC CERTIFICATE.</span>
             </div>
@@ -288,38 +290,39 @@ export default function ProductDetailPage({
 
         {/* Recommended Drops Section */}
         {relatedProducts.length > 0 && (
-          <div className="mt-32 border-t border-white/10 pt-20">
-            <div className="flex justify-between items-end mb-12">
+          <div className="mt-20 sm:mt-32 border-t border-white/10 pt-12 sm:pt-20">
+            <div className="flex justify-between items-end mb-8 sm:mb-12 gap-4">
               <div>
-                <span className="text-xs text-neutral-500 tracking-widest uppercase block mb-2">
+                <span className="text-[10px] sm:text-xs text-neutral-500 tracking-widest uppercase block mb-1.5">
                   // COMPLEMENTARY SILHOUETTES
                 </span>
-                <h2 className="text-2xl md:text-4xl font-bold tracking-tighter uppercase">
+                <h2 className="text-xl sm:text-2xl md:text-4xl font-bold tracking-tighter uppercase">
                   RECOMMENDED DROPS
                 </h2>
               </div>
               <Link
                 href="/shop"
-                className="text-xs font-mono tracking-widest uppercase text-neutral-400 hover:text-white"
+                className="text-xs font-mono tracking-widest uppercase text-neutral-400 hover:text-white min-h-[44px] flex items-center shrink-0"
               >
                 VIEW ALL →
               </Link>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-8">
               {relatedProducts.map((rel) => (
-                <div key={rel.id} className="group border border-white/10 p-4 bg-neutral-950">
-                  <Link href={`/product/${rel.slug}`} className="block relative aspect-[3/4] bg-neutral-900 overflow-hidden mb-4">
+                <div key={rel.id} className="group border border-white/10 p-2.5 sm:p-4 bg-neutral-950">
+                  <Link href={`/product/${rel.slug}`} className="block relative aspect-[3/4] bg-neutral-900 overflow-hidden mb-3 border border-white/5">
                     <Image
                       src={rel.images[0]}
                       alt={rel.name}
                       fill
+                      sizes="(max-width: 640px) 50vw, 33vw"
                       className="object-cover group-hover:scale-105 transition-transform duration-700"
                     />
                   </Link>
                   <div className="space-y-1">
-                    <h3 className="text-xs font-bold uppercase tracking-wider">
-                      <Link href={`/product/${rel.slug}`}>{rel.name}</Link>
+                    <h3 className="text-xs font-bold uppercase tracking-wider line-clamp-1">
+                      <Link href={`/product/${rel.slug}`} className="hover:underline">{rel.name}</Link>
                     </h3>
                     <p className="text-xs text-neutral-400">₹{rel.price.toLocaleString("en-IN")}</p>
                   </div>
@@ -330,6 +333,7 @@ export default function ProductDetailPage({
         )}
 
       </div>
+
 
       <SizeGuideModal
         isOpen={sizeGuideOpen}

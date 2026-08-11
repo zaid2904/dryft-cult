@@ -19,14 +19,14 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="min-h-screen bg-black text-white font-mono pt-32 pb-24 px-6 md:px-12 max-w-[1800px] mx-auto">
+    <div className="min-h-screen bg-black text-white font-mono pt-28 sm:pt-32 pb-16 sm:pb-24 px-4 sm:px-6 md:px-12 max-w-[1800px] mx-auto overflow-x-hidden">
       
       {/* Header */}
-      <div className="space-y-4 mb-16 border-b border-white/10 pb-8">
-        <span className="text-xs text-neutral-500 tracking-widest uppercase block">
+      <div className="space-y-3 sm:space-y-4 mb-10 sm:mb-16 border-b border-white/10 pb-6 sm:pb-8">
+        <span className="text-[10px] sm:text-xs text-neutral-500 tracking-widest uppercase block">
           // CLIENT CONCIERGE & INQUIRIES
         </span>
-        <h1 className="text-4xl md:text-7xl font-bold tracking-tighter uppercase">
+        <h1 className="fluid-hero-title font-bold tracking-tighter uppercase">
           CONTACT CONCIERGE
         </h1>
         <p className="text-xs text-neutral-400 max-w-lg leading-relaxed">
@@ -34,14 +34,14 @@ export default function ContactPage() {
         </p>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 lg:gap-16">
         
         {/* Left Form */}
-        <div className="lg:col-span-7 space-y-8">
+        <div className="lg:col-span-7 space-y-6 sm:space-y-8">
           {submitted ? (
-            <div className="p-8 bg-neutral-900 border border-white/20 text-center space-y-6 animate-fade-in">
+            <div className="p-6 sm:p-8 bg-neutral-900 border border-white/20 text-center space-y-6 animate-fade-in">
               <CheckCircle2 size={48} className="mx-auto text-emerald-400" />
-              <h2 className="text-2xl font-bold uppercase tracking-tight">
+              <h2 className="text-xl sm:text-2xl font-bold uppercase tracking-tight">
                 INQUIRY LOGGED
               </h2>
               <p className="text-xs text-neutral-400 leading-relaxed max-w-md mx-auto">
@@ -49,16 +49,16 @@ export default function ContactPage() {
               </p>
               <button
                 onClick={() => setSubmitted(false)}
-                className="px-6 py-3 border border-white/30 text-xs font-bold uppercase tracking-widest hover:border-white"
+                className="px-6 py-3.5 border border-white/30 text-xs font-bold uppercase tracking-widest hover:border-white min-h-[44px]"
               >
                 SEND ANOTHER TRANSMISSION
               </button>
             </div>
           ) : (
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                 <div className="space-y-2">
-                  <label className="text-xs text-neutral-400 tracking-wider uppercase block">
+                  <label className="text-[11px] sm:text-xs text-neutral-400 tracking-wider uppercase block font-bold">
                     FULL NAME *
                   </label>
                   <input
@@ -67,12 +67,12 @@ export default function ContactPage() {
                     placeholder="E.G. ARJUN SHARMA"
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    className="w-full bg-neutral-950 border border-white/20 p-4 text-xs text-white uppercase focus:border-white focus:outline-none"
+                    className="w-full bg-neutral-950 border border-white/20 p-3.5 sm:p-4 text-xs text-white uppercase focus:border-white focus:outline-none min-h-[44px]"
                   />
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-xs text-neutral-400 tracking-wider uppercase block">
+                  <label className="text-[11px] sm:text-xs text-neutral-400 tracking-wider uppercase block font-bold">
                     EMAIL ADDRESS *
                   </label>
                   <input
@@ -81,14 +81,14 @@ export default function ContactPage() {
                     placeholder="NAME@DOMAIN.COM"
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    className="w-full bg-neutral-950 border border-white/20 p-4 text-xs text-white uppercase focus:border-white focus:outline-none"
+                    className="w-full bg-neutral-950 border border-white/20 p-3.5 sm:p-4 text-xs text-white uppercase focus:border-white focus:outline-none min-h-[44px]"
                   />
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                 <div className="space-y-2">
-                  <label className="text-xs text-neutral-400 tracking-wider uppercase block">
+                  <label className="text-[11px] sm:text-xs text-neutral-400 tracking-wider uppercase block font-bold">
                     ORDER NUMBER (OPTIONAL)
                   </label>
                   <input
@@ -96,18 +96,18 @@ export default function ContactPage() {
                     placeholder="E.G. #DC-2026-9021"
                     value={formData.orderNo}
                     onChange={(e) => setFormData({ ...formData, orderNo: e.target.value })}
-                    className="w-full bg-neutral-950 border border-white/20 p-4 text-xs text-white uppercase focus:border-white focus:outline-none"
+                    className="w-full bg-neutral-950 border border-white/20 p-3.5 sm:p-4 text-xs text-white uppercase focus:border-white focus:outline-none min-h-[44px]"
                   />
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-xs text-neutral-400 tracking-wider uppercase block">
+                  <label className="text-[11px] sm:text-xs text-neutral-400 tracking-wider uppercase block font-bold">
                     INQUIRY TYPE
                   </label>
                   <select
                     value={formData.inquiryType}
                     onChange={(e) => setFormData({ ...formData, inquiryType: e.target.value })}
-                    className="w-full bg-neutral-950 border border-white/20 p-4 text-xs text-white uppercase focus:border-white focus:outline-none font-mono"
+                    className="w-full bg-neutral-950 border border-white/20 p-3.5 sm:p-4 text-xs text-white uppercase focus:border-white focus:outline-none font-mono min-h-[44px]"
                   >
                     <option value="ORDER STATUS">ORDER STATUS & SHIPPING</option>
                     <option value="SIZE CONSULTATION">SIZE & FIT CONSULTATION</option>
@@ -119,7 +119,7 @@ export default function ContactPage() {
               </div>
 
               <div className="space-y-2">
-                <label className="text-xs text-neutral-400 tracking-wider uppercase block">
+                <label className="text-[11px] sm:text-xs text-neutral-400 tracking-wider uppercase block font-bold">
                   MESSAGE TRANSMISSION *
                 </label>
                 <textarea
@@ -128,13 +128,13 @@ export default function ContactPage() {
                   placeholder="WRITE YOUR DETAILED INQUIRY HERE..."
                   value={formData.message}
                   onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                  className="w-full bg-neutral-950 border border-white/20 p-4 text-xs text-white uppercase focus:border-white focus:outline-none"
+                  className="w-full bg-neutral-950 border border-white/20 p-3.5 sm:p-4 text-xs text-white uppercase focus:border-white focus:outline-none"
                 />
               </div>
 
               <button
                 type="submit"
-                className="w-full bg-white text-black py-4 font-mono text-xs uppercase tracking-widest font-bold hover:bg-neutral-200 transition-colors flex items-center justify-center gap-2"
+                className="w-full bg-white text-black py-4 font-mono text-xs uppercase tracking-widest font-bold hover:bg-neutral-200 transition-colors flex items-center justify-center gap-2 min-h-[48px]"
               >
                 <span>TRANSMIT INQUIRY</span>
                 <Send size={14} />
@@ -144,15 +144,15 @@ export default function ContactPage() {
         </div>
 
         {/* Right Info Box */}
-        <div className="lg:col-span-5 space-y-8">
+        <div className="lg:col-span-5 space-y-6 sm:space-y-8">
           
-          <div className="p-8 bg-neutral-950 border border-white/10 space-y-6">
-            <h3 className="text-sm font-bold uppercase tracking-widest border-b border-white/10 pb-4">
+          <div className="p-6 sm:p-8 bg-neutral-950 border border-white/10 space-y-6">
+            <h3 className="text-xs sm:text-sm font-bold uppercase tracking-widest border-b border-white/10 pb-4">
               DIRECT DESK CHANNELS
             </h3>
 
             <div className="space-y-4 text-xs text-neutral-300 font-mono">
-              <div className="flex items-start gap-4">
+              <div className="flex items-start gap-3 sm:gap-4">
                 <MessageSquare size={16} className="text-emerald-400 shrink-0 mt-0.5" />
                 <div>
                   <span className="text-emerald-400 block text-[10px]">WHATSAPP INSTANT AVAILABILITY CHECK</span>
@@ -160,14 +160,14 @@ export default function ContactPage() {
                     href="https://wa.me/919328171761?text=Hi%20DRYFT%20CULT%2C%20I%20want%20to%20check%20availability%20for%20clothing%20drops."
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="font-bold text-white hover:text-emerald-400 transition-colors block"
+                    className="font-bold text-white hover:text-emerald-400 transition-colors block min-h-[36px] py-1"
                   >
                     +91 93281 71761 ↗
                   </a>
                 </div>
               </div>
 
-              <div className="flex items-start gap-4">
+              <div className="flex items-start gap-3 sm:gap-4">
                 <Mail size={16} className="text-neutral-500 shrink-0 mt-0.5" />
                 <div>
                   <span className="text-neutral-500 block text-[10px]">CLIENT SUPPORT EMAIL</span>
@@ -175,7 +175,7 @@ export default function ContactPage() {
                 </div>
               </div>
 
-              <div className="flex items-start gap-4">
+              <div className="flex items-start gap-3 sm:gap-4">
                 <Phone size={16} className="text-neutral-500 shrink-0 mt-0.5" />
                 <div>
                   <span className="text-neutral-500 block text-[10px]">VIP PHONE DESK (MON-SAT)</span>
@@ -183,7 +183,7 @@ export default function ContactPage() {
                 </div>
               </div>
 
-              <div className="flex items-start gap-4">
+              <div className="flex items-start gap-3 sm:gap-4">
                 <MapPin size={16} className="text-neutral-500 shrink-0 mt-0.5" />
                 <div>
                   <span className="text-neutral-500 block text-[10px]">FLAGSHIP DESIGN STUDIO</span>
@@ -193,8 +193,8 @@ export default function ContactPage() {
             </div>
           </div>
 
-          <div id="faq" className="p-8 bg-neutral-950 border border-white/10 space-y-4">
-            <h3 className="text-sm font-bold uppercase tracking-widest border-b border-white/10 pb-4">
+          <div id="faq" className="p-6 sm:p-8 bg-neutral-950 border border-white/10 space-y-4">
+            <h3 className="text-xs sm:text-sm font-bold uppercase tracking-widest border-b border-white/10 pb-4">
               EXPRESS DISPATCH POLICIES
             </h3>
             <div className="text-xs text-neutral-400 space-y-3 leading-relaxed">
@@ -207,5 +207,6 @@ export default function ContactPage() {
 
       </div>
     </div>
+
   );
 }
